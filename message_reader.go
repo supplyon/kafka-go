@@ -251,7 +251,7 @@ func (r *messageSetReader) readMessageV1(min int64, key readBytesFunc, val readB
 
 func (r *messageSetReader) readMessageV2(_ int64, key readBytesFunc, val readBytesFunc) (
 	offset int64, lastOffset int64, timestamp int64, headers []Header, err error) {
-	/*for r.count == 0 {
+	for r.count == 0 {
 		r.log("Read next header (skip compacted log entry) since header.count is 0")
 
 		// Keep reading new headers since in some cases when compacted logs is enabled, the broker may
@@ -264,7 +264,7 @@ func (r *messageSetReader) readMessageV2(_ int64, key readBytesFunc, val readByt
 		}
 		// Keep this as an infinite loop since in case the batch ended up with a compacted record, it will throws EOF
 		// and will be handled in the caller scope (batch).
-	}*/
+	}
 
 	if r.count == int(r.header.v2.count) { // first time reading this set, so check for compression headers.
 		var codec CompressionCodec
